@@ -1,7 +1,7 @@
 
 const express = require('express');
 const router = express.Router();
-const Task = require('./taskmodel.js');
+const Task = require('../models/taskmodel.js');
 
 
 const MOCK_USER_ID = 'dummyUserId12345';
