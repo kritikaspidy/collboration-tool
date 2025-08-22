@@ -29,8 +29,6 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const projects = await Project.find()
-      .populate('createdBy', 'name email')    // Populate user details (assumes User model with name, email)
-      .populate('collaborators', 'name email');
     res.json(projects);
   } catch (error) {
     console.error(error);
@@ -42,9 +40,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const project = await Project.findById(req.params.id)
-      .populate('createdBy', 'name email')
-      .populate('collaborators', 'name email');
-    if (!project) return res.status(404).json({ message: 'Project not found' });
+       if (!project) return res.status(404).json({ message: 'Project not found' });
     res.json(project);
   } catch (error) {
     console.error(error);
@@ -56,8 +52,7 @@ router.get('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
   try {
     const updatedProject = await Project.findByIdAndUpdate(req.params.id, req.body, { new: true })
-      .populate('createdBy', 'name email')
-      .populate('collaborators', 'name email');
+
     res.json(updatedProject);
   } catch (error) {
     console.error(error);

@@ -2,17 +2,17 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const tasksRouter = require('./controllers/task.js');
+const projectsRouter = require('./controllers/projectController.js');
 
 require('dotenv').config();
 
 const app = express();
-const projectsRouter = require('./routes/projects');
 
-app.use('/api/projects', projectsRouter);
 
 app.use(cors());
 app.use(express.json());
 app.use('/api/tasks', tasksRouter);
+app.use('/api/projects', projectsRouter);
 
 //mongoDB connection
 mongoose.connect(process.env.MONGO_URI, {
